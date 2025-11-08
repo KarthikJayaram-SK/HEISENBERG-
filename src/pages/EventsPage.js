@@ -1,7 +1,9 @@
+// src/pages/EventsPage.js
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import ElfsightWidget from '../components/ui/ElfsightWidget'; // 1. Import your new component
+// ✨ 1. Import the new ElfsightWidget component
+import ElfsightWidget from '../components/ui/ElfsightWidget'; // Adjust path if needed
 
 const PageContainer = styled.div`
   padding: 100px 2rem 4rem;
@@ -26,8 +28,10 @@ const Subtitle = styled.p`
   margin-top: 0.5rem;
 `;
 
-const FeedContainer = styled(motion.div)`
-  /* The widget is responsive by itself, this container just holds it */
+// Renamed for clarity, holds the Elfsight widget
+const WidgetDisplayContainer = styled(motion.div)`
+  /* Add any specific styling for the widget container here if needed */
+  /* For example, max-width or margins */
 `;
 
 const EventsPage = () => {
@@ -38,14 +42,14 @@ const EventsPage = () => {
         <Subtitle>Our journey, live from Instagram.</Subtitle>
       </Header>
 
-      <FeedContainer
+      <WidgetDisplayContainer
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        {/* 2. Use the component here */}
+        {/* ✨ 2. Use the new ElfsightWidget component here */}
         <ElfsightWidget />
-      </FeedContainer>
+      </WidgetDisplayContainer>
     </PageContainer>
   );
 };

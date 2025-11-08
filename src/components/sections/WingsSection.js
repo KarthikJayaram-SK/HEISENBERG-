@@ -10,23 +10,44 @@ import airforceLogo from '../../assets/airforce-logo.png';
 
 const WingsContainer = styled.section`
   padding: 6rem 2rem;
+  background-color: #F8F9FA; // A slightly different background color to stand out
+
+  // ✨ Responsive: Reduce padding on smaller screens
+  @media (max-width: 768px) {
+    padding: 4rem 1rem;
+  }
 `;
+
 const WingsContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
+
 const SectionTitle = styled(motion.h2)`
   font-size: 3rem;
   font-weight: 700;
   text-align: center;
   margin-bottom: 4rem;
   color: #1A2B4C;
+
+  // ✨ Responsive: Adjust font size for smaller screens
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+  }
 `;
+
 const WingsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2.5rem;
+
+  // ✨ Responsive: Adjust gap for smaller screens
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
 `;
+
 const WingCard = styled(motion.div)`
   background: #FFFFFF;
   border-radius: 20px;
@@ -36,11 +57,19 @@ const WingCard = styled(motion.div)`
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; // Added transition for hover
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
 `;
+
 const CardImage = styled.div`
   height: 200px;
   background: url(${props => props.$bgImage}) center/cover;
 `;
+
 const CardContent = styled.div`
   padding: 1.5rem;
   display: flex;
@@ -49,6 +78,7 @@ const CardContent = styled.div`
   text-align: center;
   flex-grow: 1;
 `;
+
 const WingIcon = styled.div`
   width: 90px;
   height: 90px;
@@ -67,12 +97,19 @@ const WingIcon = styled.div`
     object-fit: contain;
   }
 `;
+
 const WingTitle = styled.h3`
   font-size: 1.75rem;
   font-weight: 700;
   color: #1A2B4C;
   margin: 0;
+
+  // ✨ Responsive: Adjust font size
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
+
 const WingDescription = styled.p`
   font-size: 1rem;
   color: #555;
@@ -80,6 +117,7 @@ const WingDescription = styled.p`
   margin: 1rem 0;
   flex-grow: 1;
 `;
+
 const ExploreButton = styled(motion.button)`
   background: #FFBF00;
   border: none;
@@ -98,9 +136,10 @@ const wings = [
     { id: 'airforce', title: 'Air Wing', description: 'Soaring to new heights with aviation excellence and aerospace technology.', icon: airforceLogo, image: 'https://th.bing.com/th/id/OIP.fkJWC2RbMq5Pm5qAbfkepAHaEI?w=334&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3' }
 ];
 
-const WingsSection = () => {
+// --- The component's logic is unchanged ---
+const WingsSection = ({ id }) => { // ✨ Added id prop for scrolling
   const navigate = useNavigate();
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -113,7 +152,7 @@ const WingsSection = () => {
   };
 
   return (
-    <WingsContainer ref={ref}>
+    <WingsContainer id={id} ref={ref}> {/* ✨ Use the id prop here */}
       <WingsContent>
         <motion.div variants={containerVariants} initial="hidden" animate={inView ? "visible" : "hidden"}>
           <SectionTitle>Three Wings of Excellence</SectionTitle>
@@ -122,7 +161,7 @@ const WingsSection = () => {
               <WingCard
                 key={wing.id}
                 variants={cardVariants}
-                whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)" }}
+                // whileHover is better handled by CSS for performance unless it's a complex animation
                 onClick={() => navigate(`/wing/${wing.id}`)}
               >
                 <CardImage $bgImage={wing.image} />

@@ -1,37 +1,45 @@
-import React, { useEffect, memo } from 'react';
+// src/components/ui/ElfsightWidget.js
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+
+const WidgetContainer = styled.div`
+  width: 100%;
+  min-height: 400px; // Add a min-height to prevent layout shifts while loading
+`;
 
 const ElfsightWidget = () => {
+  const widgetClass = 'elfsight-app-5c201895-0245-4296-bef8-0fc6d9762325'; // Your specific widget class
+  const scriptSrc = 'https://elfsightcdn.com/platform.js';
+  const scriptId = 'elfsight-platform-script'; // Unique ID for the script
+
   useEffect(() => {
-    // This function creates a script tag and adds it to the page head
-    const script = document.createElement('script');
-    script.src = 'https://elfsightcdn.com/platform.js';
-    script.async = true;
-    
-    // Check if the script is already on the page to avoid duplicates
-    const existingScript = document.querySelector(`script[src="${script.src}"]`);
-    if (!existingScript) {
-      document.head.appendChild(script);
+    // Check if the script is already added
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.src = scriptSrc;
+      script.id = scriptId;
+      script.async = true; // Use async as provided
+      // data-use-service-core might not be needed if not in Elfsight's code
+      // script.dataset.useServiceCore = true; 
+      document.body.appendChild(script);
     }
 
-    // Clean up the script when the component is unmounted
-    return () => {
-      const elfsightScript = document.querySelector(`script[src="${script.src}"]`);
-      if (elfsightScript) {
-        // While we could remove it, it's often better to leave it
-        // in case the user navigates back to the page. Elfsight's script
-        // is designed to handle this.
-      }
-    };
-  }, []); // The empty array ensures this effect runs only once
+    // Cleanup function (optional, might not be needed for platform.js)
+    // return () => {
+    //   const existingScript = document.getElementById(scriptId);
+    //   if (existingScript) {
+    //      // Check Elfsight docs if removing this script causes issues
+    //     // document.body.removeChild(existingScript);
+    //   }
+    // };
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
-    // This div is what the Elfsight script will target
-    <div 
-      className="elfsight-app-b7c5afa9-3619-4c0a-b51f-d0cd8ad7af3a" 
-      data-elfsight-app-lazy
-    ></div>
+    <WidgetContainer>
+      {/* This div matches the code Elfsight provided */}
+      <div className={widgetClass} data-elfsight-app-lazy></div>
+    </WidgetContainer>
   );
 };
 
-// memo prevents the component from re-rendering unnecessarily
-export default memo(ElfsightWidget);
+export default ElfsightWidget;

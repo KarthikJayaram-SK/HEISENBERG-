@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 
+// --- STYLES (Unchanged) ---
 const FormContainer = styled.section`
   padding: 6rem 2rem;
   background-color: #F0F2F5;
@@ -69,7 +70,7 @@ const Select = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%2L287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
   background-repeat: no-repeat;
   background-position: right .7em top 50%;
   background-size: .65em auto;
@@ -98,21 +99,49 @@ const Message = styled.p`
   min-height: 1.5rem;
   font-weight: 500;
 `;
+// ---
+
+// ✨ 1. PASTE YOUR WEB APP URL HERE
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxUaoGqvXwLE191LUYR6sebZDcUv-X_L2jwJj7Xm5L87iuxgjQ1HL-q4CAc9UM3XpcFQ/exec";
 
 const RegistrationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
 
-  const handleSubmit = (e) => {
+  // ✨ 2. UPDATED SUBMIT FUNCTION
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setMessage('Submitting...');
-    setTimeout(() => {
-        setMessage('Registration successful! We will contact you soon.');
-        setIsSubmitting(false);
-        e.target.reset(); // Clears the form
-    }, 1500);
+
+    // Get all form data
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      // Send the data to the Google Apps Script
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        // 'mode: no-cors' is a temporary workaround for Google Script's CORS behavior
+        // We "fire and forget" and assume it worked.
+        mode: 'no-cors', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Since 'no-cors' prevents reading the response, we optimistically show success
+      setMessage('Registration successful! We will contact you soon.');
+      e.target.reset(); // Clears the form
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setMessage('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const formVariants = {
@@ -127,6 +156,8 @@ const RegistrationForm = () => {
           Join Sairam NCC
         </SectionTitle>
         <Form variants={formVariants} initial="hidden" animate={inView ? 'visible' : 'hidden'} onSubmit={handleSubmit}>
+          {/* Form fields are unchanged */}
+          {/* Note: The 'name' attribute (e.g., name="Phone Number") MUST match the script */}
           <FormGroup className="full-width">
             <Label htmlFor="Name">Name</Label>
             <Input type="text" name="Name" id="Name" required />
