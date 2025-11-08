@@ -42,32 +42,6 @@
 
 ---
 
-## 🚀 Live Demo
-
-🔗 [**Visit HEISENBERG- Live**](https://heisenberg-ncc.vercel.app) *(Replace with your actual link)*
-
-> Try logging in as admin:  
-> `Email: admin@ncc.sairam.edu.in`  
-> `Password: ******`
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-| **Home Page** | **Cadet Gallery** |
-|--------------|------------------|
-| ![Home](https://via.placeholder.com/600x300?text=Home+Page+Animation) | ![Cadets](https://via.placeholder.com/600x300?text=Cadet+Gallery+Grid) |
-
-| **Admin Dashboard** | **Event Timeline** |
-|---------------------|--------------------|
-| ![Admin](https://via.placeholder.com/600x300?text=Admin+Panel) | ![Events](https://via.placeholder.com/600x300?text=Event+Timeline) |
-
-</div>
-
----
-
 ## 🧑‍💻 Tech Stack
 
 Libraries & Tools
@@ -78,6 +52,8 @@ Cloudinary Upload Widget
 React Toastify for notifications
 Vite / CRA for fast builds
 ESLint + Prettier for code quality
+
+---
 
 📂 Project Structure
 
@@ -100,6 +76,8 @@ src/
 ├── styles/           # Global themes & animations
 ├── assets/           # Images, icons, animations
 └── App.jsx, index.js
+
+---
 
 🛠️ Setup & Installation
 Prerequisites
