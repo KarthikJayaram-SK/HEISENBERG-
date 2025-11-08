@@ -70,6 +70,73 @@
 
 ## 🧑‍💻 Tech Stack
 
+Libraries & Tools
+
+React Hooks (useState, useEffect, useContext)
+Firebase SDK v9+ (modular)
+Cloudinary Upload Widget
+React Toastify for notifications
+Vite / CRA for fast builds
+ESLint + Prettier for code quality
+
+📂 Project Structure
+
+src/
+├── components/       # Reusable UI components
+│   ├── Navbar.jsx
+│   ├── CadetCard.jsx
+│   ├── AnimatedSection.jsx
+│   └── AdminForm.jsx
+├── pages/            # Route pages
+│   ├── Home.jsx
+│   ├── Wing.jsx
+│   ├── Gallery.jsx
+│   └── AdminDashboard.jsx
+├── context/          # Auth & Global State
+│   └── AuthContext.jsx
+├── firebase/         # Firebase config & services
+│   ├── firebase.js
+│   └── firestore.js
+├── styles/           # Global themes & animations
+├── assets/           # Images, icons, animations
+└── App.jsx, index.js
+
+🛠️ Setup & Installation
+Prerequisites
+
+Node.js (>=16)
+npm or yarn
+Firebase Project
+Cloudinary Account
+
+📊 Statistics (Live Data)
+<img width="1000" height="261" alt="image" src="https://github.com/user-attachments/assets/d5dc4e4b-1479-496b-a21b-6a73b4481bb8" />
+
+<img width="988" height="625" alt="image" src="https://github.com/user-attachments/assets/166771e6-c51a-49d8-b57d-a9150a189883" />
+
+🎨 Animations & UX Highlights
+
+Page Transitions using Framer Motion
+Hover Effects on cadet cards
+Lazy-loaded Images with shimmer
+Scroll-triggered Animations
+Dark Mode Toggle (coming soon)
+
+📝 License
+Distributed under the MIT License. See LICENSE for more information.
+
+👨‍✈️ Project By
+Karthik Jayaram S K
+NCC Cadet | Full-Stack Developer | Sri Sai Ram Engineering College
+<img src="https://img.shields.io/github/followers/KarthikJayaram-SK?label=Follow&#x26;style=social" alt="GitHub">
+
+"Discipline. Duty. Devotion."
+HEISENBERG- — Built for the Brave.
+<img src="https://raw.githubusercontent.com/KarthikJayaram-SK/HEISENBERG-/main/public/ncc-logo.png" width="100"/>
+
+```
+
+
 ```mermaid
 graph TD
     A[Frontend] --> B[React 18]
