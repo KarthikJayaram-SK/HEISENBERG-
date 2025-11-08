@@ -125,6 +125,12 @@ Dark Mode Toggle (coming soon)
 📝 License
 Distributed under the MIT License. See LICENSE for more information.
 
+AI USED
+1. Gemini - for fetching code
+2. Napkin AI - for generating flowcharts
+3. OpenAI API - for creating AI CHAT BOT
+
+
 👨‍✈️ Project By
 Karthik Jayaram S K
 NCC Cadet | Full-Stack Developer | Sri Sai Ram Engineering College
