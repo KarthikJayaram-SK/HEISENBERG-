@@ -83,6 +83,9 @@ graph TD
 
     J[Media] --> K[Cloudinary CDN]
 
+
+
+
     style A fill:#61DAFB,stroke:#333,color:white
     style F fill:#FFCA28,stroke:#333,color:black
     style J fill:#FFA726,stroke:#333,color:black
